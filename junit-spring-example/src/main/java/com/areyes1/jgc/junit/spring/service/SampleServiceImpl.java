@@ -30,6 +30,7 @@ public class SampleServiceImpl implements SampleService {
 	}
 	
 	public Order getOrder(int id) {
+	System.out.println("In geOrder()");
 		Order newOrder = new Order();
 		newOrder.setOrderId(new Random().nextInt());
 		newOrder.setSecurityCode("XYZ");
