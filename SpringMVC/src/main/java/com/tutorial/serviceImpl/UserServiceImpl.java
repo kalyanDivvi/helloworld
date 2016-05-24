@@ -10,6 +10,7 @@ public class UserServiceImpl implements UserService {
     
     @Override
     public User getEmployeeDetails() {
+        System.out.println("In getEMployeeDetails()");
         User user = new User();
         user.setAgeGroup("24");
         user.setGender("F");
