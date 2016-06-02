@@ -6,11 +6,15 @@
               as the first entry and export the buildfile again. --><project basedir="." default="build" name="sample-jenkins">
     <property environment="env"/>
     <property name="ECLIPSE_HOME" value="../../EclipseMars/eclipse/"/>
+    <property name="junit.output.dir" value="junit"/>
     <property name="debuglevel" value="source,lines,vars"/>
     <property name="target" value="1.8"/>
     <property name="source" value="1.8"/>
     <path id="sample-jenkins.classpath">
         <pathelement location="bin"/>
+        <pathelement location="C:/Users/kalyan/Desktop/sapient/hamcrest-core-1.2.jar.zip"/>
+        <pathelement location="C:/Users/kalyan/Desktop/sapient/junit-4.12.jar"/>
+        <pathelement location="C:/Users/kalyan/Desktop/sapient/hamcrest-all-1.3.jar.zip"/>
     </path>
     <target name="init">
         <mkdir dir="bin"/>
@@ -52,5 +56,26 @@
         <java classname="com.java.test.MessageTest" failonerror="true" fork="yes">
             <classpath refid="sample-jenkins.classpath"/>
         </java>
+    </target>
+    <target name="MessageJUnit">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="com.java.test.MessageJUnit" todir="${junit.output.dir}"/>
+            <classpath refid="sample-jenkins.classpath"/>
+        </junit>
+    </target>
+    <target name="TestRunner">
+        <java classname="com.java.test.TestRunner" failonerror="true" fork="yes">
+            <classpath refid="sample-jenkins.classpath"/>
+        </java>
+    </target>
+    <target name="junitreport">
+        <junitreport todir="${junit.output.dir}">
+            <fileset dir="${junit.output.dir}">
+                <include name="TEST-*.xml"/>
+            </fileset>
+            <report format="frames" todir="${junit.output.dir}"/>
+        </junitreport>
     </target>
 </project>
